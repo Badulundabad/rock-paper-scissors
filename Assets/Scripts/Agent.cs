@@ -5,9 +5,8 @@ public class Agent : MonoBehaviour
     private float _speed = 2f;
     private Vector3 _direction = Vector3.zero;
     [SerializeField] private AgentType agentType;
-    [SerializeField] private LayerMask mask;
 
-    public AgentType Type { get => agentType; }
+    public AgentType AgentType { get => agentType; }
 
 
     private void Start()
@@ -34,9 +33,10 @@ public class Agent : MonoBehaviour
         if (agent != null)
         {
             ChangeDirection();
-            if (agent.Type != this.Type)
+            if (agent.AgentType != this.AgentType)
             {
                 Fight(agent);
+                Messenger<AgentType>.Broadcast(GameEvents.CHECK_FOR_WINNER, agent.AgentType);
             }
         }
         else
@@ -47,12 +47,12 @@ public class Agent : MonoBehaviour
 
     private void Fight(Agent enemy)
     {
-        bool lose = (this.Type == AgentType.Stone && enemy.Type == AgentType.Paper) ||
-                    (this.Type == AgentType.Paper && enemy.Type == AgentType.Scissors) ||
-                    (this.Type == AgentType.Scissors && enemy.Type == AgentType.Stone);
+        bool lose = (this.AgentType == AgentType.Stone && enemy.AgentType == AgentType.Paper) ||
+                    (this.AgentType == AgentType.Paper && enemy.AgentType == AgentType.Scissors) ||
+                    (this.AgentType == AgentType.Scissors && enemy.AgentType == AgentType.Stone);
         if (lose)
         {
-            this.agentType = enemy.Type;
+            this.agentType = enemy.AgentType;
             SpriteRenderer enemyRenderer = enemy.gameObject.GetComponent<SpriteRenderer>();
             gameObject.GetComponent<SpriteRenderer>().sprite = enemyRenderer.sprite;
         }

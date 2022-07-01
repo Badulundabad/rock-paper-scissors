@@ -1,13 +1,26 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
     [SerializeField] private GameObject menu;
     [SerializeField] private GameObject restartButton;
+    [SerializeField] private GameObject winnerMessage;
 
     void Start()
     {
+        Messenger<Sprite>.AddListener(GameEvents.SHOW_WINNER, ShowWinner);
+        Messenger.AddListener(GameEvents.SHOW_MENU, ShowMenu);
+        Messenger.AddListener(GameEvents.HIDE_MENU, HideMenu);
         restartButton.SetActive(false);
+        winnerMessage.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        Messenger<Sprite>.RemoveListener(GameEvents.SHOW_WINNER, ShowWinner);
+        Messenger.RemoveListener(GameEvents.SHOW_MENU, ShowMenu);
+        Messenger.RemoveListener(GameEvents.HIDE_MENU, HideMenu);
     }
 
     public void ShowMenu()
@@ -20,5 +33,11 @@ public class UIController : MonoBehaviour
     {
         menu.SetActive(false);
         restartButton.SetActive(false);
+    }
+
+    private void ShowWinner(Sprite sprite)
+    {
+        winnerMessage.GetComponent<Image>().sprite = sprite;
+        winnerMessage.SetActive(true);
     }
 }

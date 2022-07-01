@@ -12,6 +12,16 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject paperPrefab;
     private List<Agent> _agents = new List<Agent>();
 
+    private void Start()
+    {
+        Messenger<AgentType>.AddListener(GameEvents.CHECK_FOR_WINNER, CheckForWinner);
+    }
+
+    private void OnDestroy()
+    {
+        Messenger<AgentType>.RemoveListener(GameEvents.CHECK_FOR_WINNER, CheckForWinner);
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && IsGameStarted)
@@ -19,11 +29,11 @@ public class GameController : MonoBehaviour
             if (IsGameContinuing)
             {
                 Pause();
-                SendMessage("ShowMenu");
+                Messenger.Broadcast(GameEvents.SHOW_MENU);
             }
             else
             {
-                SendMessage("HideMenu");
+                Messenger.Broadcast(GameEvents.HIDE_MENU);
                 Play();
             }
         }
@@ -35,7 +45,7 @@ public class GameController : MonoBehaviour
         {
             StartNew();
         }
-        SendMessage("HideMenu");
+        Messenger.Broadcast(GameEvents.HIDE_MENU);
         IsGameContinuing = true;
     }
 
@@ -43,14 +53,19 @@ public class GameController : MonoBehaviour
     {
         if (_agents.Count > 0)
         {
-            foreach (Agent agent in _agents)
-            {
-                Destroy(agent.gameObject);
-            }
-            _agents.Clear();
+            RemoveAgents();
         }
         StartNew();
         IsGameContinuing = true;
+    }
+
+    private void RemoveAgents()
+    {
+        foreach (Agent agent in _agents)
+        {
+            Destroy(agent.gameObject);
+        }
+        _agents.Clear();
     }
 
     public void Exit()
@@ -82,11 +97,14 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void CheckForVictory()
+    private void CheckForWinner(AgentType type)
     {
-        if (_agents.All(a => a.Type == AgentType.Paper || a.Type == AgentType.Stone || a.Type == AgentType.Scissors))
+        if (_agents.All(a => a.AgentType == type))
         {
-            SendMessage("Victory", _agents.First().Type);
+            IsGameContinuing = false;
+            Sprite winnerSprite = _agents.First().gameObject.GetComponent<SpriteRenderer>().sprite;
+            Messenger<Sprite>.Broadcast(GameEvents.SHOW_WINNER, winnerSprite);
+            RemoveAgents();
         }
     }
 }
