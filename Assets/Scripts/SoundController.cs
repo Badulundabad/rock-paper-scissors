@@ -2,7 +2,7 @@
 
 public class SoundController : MonoBehaviour
 {
-    [SerializeField] private AudioClip stone;
+    [SerializeField] private AudioClip rock;
     [SerializeField] private AudioClip scissors;
     [SerializeField] private AudioClip paper;
     private AudioSource _source;
@@ -20,8 +20,8 @@ public class SoundController : MonoBehaviour
 
     private void PlaySound(AgentType type)
     {
-        if (type == AgentType.Stone)
-            _source.PlayOneShot(stone);
+        if (type == AgentType.Rock)
+            _source.PlayOneShot(rock);
         else if (type == AgentType.Scissors)
             _source.PlayOneShot(scissors);
         else

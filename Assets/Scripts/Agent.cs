@@ -47,9 +47,9 @@ public class Agent : MonoBehaviour
 
     private void Fight(Agent enemy)
     {
-        bool lose = (this.AgentType == AgentType.Stone && enemy.AgentType == AgentType.Paper) ||
+        bool lose = (this.AgentType == AgentType.Rock && enemy.AgentType == AgentType.Paper) ||
                     (this.AgentType == AgentType.Paper && enemy.AgentType == AgentType.Scissors) ||
-                    (this.AgentType == AgentType.Scissors && enemy.AgentType == AgentType.Stone);
+                    (this.AgentType == AgentType.Scissors && enemy.AgentType == AgentType.Rock);
         if (lose)
         {
             this.agentType = enemy.AgentType;
@@ -67,7 +67,7 @@ public class Agent : MonoBehaviour
 
 public enum AgentType
 {
-    Stone,
+    Rock,
     Scissors,
     Paper
 }

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -6149811116199398569}
   - component: {fileID: 6390518076179545664}
   m_Layer: 6
-  m_Name: Stone
+  m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,6 +147,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agentType: 0
-  mask:
-    serializedVersion: 2
-    m_Bits: 64
