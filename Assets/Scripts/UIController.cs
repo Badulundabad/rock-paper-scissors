@@ -23,6 +23,16 @@ public class UIController : MonoBehaviour
         Messenger.RemoveListener(GameEvents.HIDE_MENU, HideMenu);
     }
 
+    private void Update()
+    {
+        if (Input.anyKeyDown && winnerMessage.activeSelf)
+        {
+            winnerMessage.SetActive(false);
+            restartButton.SetActive(false);
+            menu.SetActive(true);
+        }
+    }
+
     public void ShowMenu()
     {
         menu.SetActive(true);

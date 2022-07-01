@@ -102,6 +102,7 @@ public class GameController : MonoBehaviour
         if (_agents.All(a => a.AgentType == type))
         {
             IsGameContinuing = false;
+            IsGameStarted = false;
             Sprite winnerSprite = _agents.First().gameObject.GetComponent<SpriteRenderer>().sprite;
             Messenger<Sprite>.Broadcast(GameEvents.SHOW_WINNER, winnerSprite);
             RemoveAgents();
