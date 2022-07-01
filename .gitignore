@@ -1,2 +1,5 @@
 Library/
 Logs/
+Temp/
+Debug/
+.vs/
