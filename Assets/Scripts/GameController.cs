@@ -56,6 +56,7 @@ public class GameController : MonoBehaviour
             RemoveAgents();
         }
         StartNew();
+        Messenger.Broadcast(GameEvents.HIDE_MENU);
         IsGameContinuing = true;
     }
 
