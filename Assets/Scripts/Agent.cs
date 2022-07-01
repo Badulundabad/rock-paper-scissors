@@ -55,6 +55,7 @@ public class Agent : MonoBehaviour
             this.agentType = enemy.AgentType;
             SpriteRenderer enemyRenderer = enemy.gameObject.GetComponent<SpriteRenderer>();
             gameObject.GetComponent<SpriteRenderer>().sprite = enemyRenderer.sprite;
+            Messenger<AgentType>.Broadcast(GameEvents.PLAY_SOUND, this.agentType);
         }
     }
 

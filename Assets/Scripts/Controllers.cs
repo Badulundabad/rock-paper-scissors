@@ -2,6 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(GameController))]
 [RequireComponent(typeof(UIController))]
+[RequireComponent(typeof(SoundController))]
 public class Controllers : MonoBehaviour
 {
     public static UIController UI { get; private set; }
