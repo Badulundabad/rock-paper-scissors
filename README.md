@@ -1,6 +1,8 @@
 # stone-scissors-paper:
 It's a small game that tells a story of 3 kingdoms're fighting with each others - stone, scissors, paper.
 
+You can play it on Unity Play https://play.unity.com/mg/other/rock-scissors-paper
+
 # Acknowledgement:
 Idea is taken from this post on [Telegram](https://t.me/c/1358296490/45796)
 
