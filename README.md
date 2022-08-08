@@ -1,4 +1,4 @@
-# stone-scissors-paper:
+# Rock Paper Scissors
 This game tells us a story of endless fight between Rock, Paper and Scissors
 
 You can play it on Unity Play https://play.unity.com/mg/other/rock-scissors-paper
